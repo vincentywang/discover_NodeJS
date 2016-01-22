@@ -43,8 +43,8 @@ exports.create = function (info) {
 	var instance = new Flight();
 
 	instance.fill(info);
-	console.log("what is allDes");
-	console.log(allDes);
+	// console.log("what is allDes");
+	// console.log(allDes);
 
 	count ++ ;
 	if (allDes.indexOf(info['destination']) < 0) {
