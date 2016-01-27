@@ -20,8 +20,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+// change header information 
+app.use(function (req, res, next) {
+  res.set('X-Power-By', 'Flight Tracker');
+  next();
+});
 
 app.get('/flight/:number', routes.flight);
+app.put('/flight/:number/arrive', routes.arrive);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
