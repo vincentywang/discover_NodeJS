@@ -17,6 +17,8 @@ module.exports = function (flights) {
 	functions.flight = function(req, res){
 		var number = req.param('number');
 
+		req.session.lastNumber = number;
+
 		if (typeof flights[number] === 'undefined') {
 			res.status(404).json({status: 'error'});
 		} else {
@@ -38,7 +40,7 @@ module.exports = function (flights) {
 			record.save(function (err) {
 				if (err) {
 					console.log(err);
-					res.status(500).json({status: 'failure'})
+					res.status(500).json({status: 'failure'});
 				} else {
 					res.json({status: 'success'});
 				}
@@ -64,7 +66,8 @@ module.exports = function (flights) {
 			} else {
 				res.render('arrivals', {
 					title: 'Arrivals',
-					arrivals: arrivals
+					arrivals: arrivals,
+					lastNumber: req.session.lastNumber
 				});
 			}
 		});
