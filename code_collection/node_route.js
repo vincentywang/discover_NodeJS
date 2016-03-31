@@ -1,6 +1,14 @@
-/**
- * route logic with path
- */ 
+
+/*
+    |--------------------------------------------------------------------------
+    | simulate routing logics only with PATH
+    |--------------------------------------------------------------------------
+    |
+    | 1. create route object maintain a routes store to save request events and handler functions
+    | 2. create a requestListener which is a function automatically added to the 'request' event
+    | 3. create request event and register handler to the event
+    |
+    */
 var http = require("http");
 var url = require("url");
 var route = {
@@ -9,6 +17,18 @@ var route = {
      this.routes[path] = handler;
   }
 };
+
+function onRequest(request, response) {
+  var pathname = url.parse(request.url).pathname;
+  console.log("Request for " + pathname + " received.");
+  if(typeof route.routes[pathname] ==='function'){
+    // route.routes[pathname] is the handler associated with the pathname
+    route.routes[pathname](request, response);
+  }else{
+    response.writeHead(404, {"Content-Type": "text/plain"});
+    response.end("404 Not Found");
+  }
+}
 
 route.for("/start", function(request, response){
   response.writeHead(200, {"Content-Type": "text/plain"});
@@ -22,19 +42,13 @@ route.for("/finish", function(request, response){
   response.end();
 });
 
-function onRequest(request, response) {
-  var pathname = url.parse(request.url).pathname;
-  console.log("Request for " + pathname + " received.");
-  if(typeof route.routes[pathname] ==='function'){
-    route.routes[pathname](request, response);
-  }else{
-    response.writeHead(404, {"Content-Type": "text/plain"});
-    response.end("404 Not Found");
-  }
-}
+// + + + follow above pattern to add more request event
 
+
+// onRequest is a requestListener 
 http.createServer(onRequest).listen(9999);
 console.log("Server has started.");
+
 
 /**
  * route logic with path and method
