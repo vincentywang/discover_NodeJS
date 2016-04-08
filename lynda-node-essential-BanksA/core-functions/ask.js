@@ -14,12 +14,14 @@ function ask (i) {
 process.stdin.on('data', function(data){
 	answers.push(data.toString().trim());
 	if (answers.length < question.length) {
+		// keep ask questions
 		ask(answers.length);
 	} else {
 		process.exit();
 	}
 });
 
+// type exit in command line
 process.on('exit', function(){
 	process.stdout.write(`\n\n\n\n`);
 
