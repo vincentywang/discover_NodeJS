@@ -5,6 +5,7 @@
  */
 function grab (flag) {
 	var index = process.argv.indexOf(flag);
+	// if find --greeting, next argument is "hello hello haha", that's why return index + 1 argument
 	return (index === -1) ? null : process.argv[index+1];
 }
 
