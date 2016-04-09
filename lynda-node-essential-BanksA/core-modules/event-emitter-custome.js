@@ -1,4 +1,6 @@
 /*
+// How events emitter event register
+
 var events = require('events');
 
 var emitter = new events.EventEmitter();
