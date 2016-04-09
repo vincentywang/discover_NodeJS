@@ -1,3 +1,13 @@
+/*
+|--------------------------------------------------------------------------
+| node core module 'readline', 'fs'
+|--------------------------------------------------------------------------
+|
+| 1. fs.writeFileSync
+| 2. fs.appendFile
+|
+*/
+
 var readline = require('readline');
 var rl = readline.createInterface(process.stdin, process.stdout);
 var fs = require("fs");
