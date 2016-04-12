@@ -16,6 +16,12 @@ var req = https.request(options, function(res) {
 
 	res.setEncoding("UTF-8");
 
+	/*
+	 * Adds a one time listener function for the event. This listener is invoked only the next time event is triggered, 
+	 * after which it is removed.
+	 */
+	 
+	 // this is only for the first time change
 	res.once('data', function(chunk) {
 		console.log(chunk);
 	});
