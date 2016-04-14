@@ -10,7 +10,7 @@ http.createServer(function(req, res) {
 			res.writeHead(200, {"Content-Type": "text/html"});
 			res.end(html);
 		});
-
+	// match style files
 	}else if (req.url.match(/.css$/)) {
 	
 		var cssPath = path.join(__dirname, 'public', req.url);
@@ -18,7 +18,7 @@ http.createServer(function(req, res) {
 
 		res.writeHead(200, {"Content-Type": "text/css"});
 		fileStream.pipe(res);
-
+	// match image files
 	}else if (req.url.match(/.jpg$/)) {	
 
 		var imgPath = path.join(__dirname, "public", req.url);
